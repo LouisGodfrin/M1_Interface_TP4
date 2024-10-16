@@ -1,5 +1,8 @@
 <template>
     <div>
+      <SigninButton/>
+    </div>
+    <div>
       <AsyncComponent @click="denied" />
     </div>
   
@@ -31,6 +34,7 @@
 </template>
   
   <script>
+  import SigninButton from '../components/SigninButton.vue';
   import AsyncComponent from '../components/AsyncComponent.vue';
   import ButtonLayout from '../components/ButtonLayout.vue';
   
@@ -41,6 +45,7 @@
     {
       AsyncComponent,
       ButtonLayout,
+      SigninButton,
     },
     data() 
     {
