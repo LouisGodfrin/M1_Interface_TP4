@@ -1,7 +1,10 @@
 <template>
     <div>
-      <SigninButton/>
+      <SigninButton :isDisabled="isDisabled" @user-signed-in="handleUserSignedIn" />
     </div>
+      <div v-if="user">
+        <p>Welcome, {{ user.username }}</p>
+      </div>
     <div>
       <AsyncComponent @click="denied" />
     </div>
@@ -56,10 +59,17 @@
         buttonWidth: 200,
         buttonHeight: 40,
         click: 1,
+        user: null,
       };
     },
     methods: 
     {
+      // Retrieve user from SigninButton
+      handleUserSignedIn(user)
+      {
+        this.user = user; 
+        this.isDisabled = true;
+      },
         handleClick() 
         {
             this.isDisabled = true;

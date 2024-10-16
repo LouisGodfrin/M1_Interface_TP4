@@ -1,9 +1,8 @@
 <template>
     <div>
-      <button @click="signIn">Sign In</button>
-      <div v-if="user">
-        <p>Welcome, {{ user.username }}</p>
-      </div>
+      <button @click="signIn" :disabled="isDisabled">
+      {{ isDisabled ? 'Disabled' : 'Sign In' }}
+    </button>
     </div>
   </template>
   
@@ -13,18 +12,25 @@
   export default 
   {
     name: 'SigninButton',
+    props:
+    {
+        isDisabled: 
+      {
+        type: Boolean,
+        default: false
+      }, 
+    },
     data() 
     {
       return {
-        user: null,  // Stocker les informations de l'utilisateur ici
-        msalInitialized: false, // Suivi de l'état d'initialisation
+        user: null,  // Information of the user
+        msalInitialized: false, // Initialisation State
       };
     },
     async created() 
     {
-      // Initialiser MSAL lors de la création du composant
       try {
-        await initializeMsal();  // Assurez-vous que la fonction est bien attendue
+        await initializeMsal();
         this.msalInitialized = true;
       } catch (error) {
         console.error("Erreur lors de l'initialisation de MSAL :", error);
@@ -42,8 +48,9 @@
   
         try 
         {
-          // Appeler la fonction signInAndGetUser après l'initialisation de MSAL
+        
           this.user = await signInAndGetUser();
+          this.$emit('user-signed-in', this.user); // Transmit the user to HomePage
         } 
         catch (error) 
         {
