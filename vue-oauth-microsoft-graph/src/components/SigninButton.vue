@@ -1,7 +1,7 @@
 <template>
     <div>
-      <button @click="signIn" :disabled="isDisabled">
-      {{ isDisabled ? 'Disabled' : 'Sign In' }}
+      <button @click="signIn" :disabled="state.isCut">
+      {{ state.isCut ? 'Disabled' : 'Sign In' }}
     </button>
     </div>
   </template>
@@ -12,14 +12,8 @@
   export default 
   {
     name: 'SigninButton',
-    props:
-    {
-        isDisabled: 
-      {
-        type: Boolean,
-        default: false
-      }, 
-    },
+    inject: ['state', 'setUser'],
+
     data() 
     {
       return {
@@ -50,7 +44,7 @@
         {
         
           this.user = await signInAndGetUser();
-          this.$emit('user-signed-in', this.user); // Transmit the user to HomePage
+          this.setUser(this.user); // Update by injection
         } 
         catch (error) 
         {

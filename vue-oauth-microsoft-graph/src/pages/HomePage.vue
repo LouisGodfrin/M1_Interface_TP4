@@ -1,9 +1,9 @@
 <template>
     <div>
-      <SigninButton :isDisabled="isDisabled" @user-signed-in="handleUserSignedIn" />
+      <SigninButton @user-signed-in="handleUserSignedIn" />
     </div>
-      <div v-if="user">
-        <p>Welcome, {{ user.username }}</p>
+      <div v-if="state.user">
+        <p>Welcome, {{ state.user.username }}</p>
       </div>
     <div>
       <AsyncComponent @click="denied" />
@@ -37,6 +37,8 @@
 </template>
   
   <script>
+  import { reactive } from 'vue';
+
   import SigninButton from '../components/SigninButton.vue';
   import AsyncComponent from '../components/AsyncComponent.vue';
   import ButtonLayout from '../components/ButtonLayout.vue';
@@ -50,10 +52,36 @@
       ButtonLayout,
       SigninButton,
     },
+    setup() 
+    {
+      const state = reactive({
+        isCut: false,
+        user: null,
+      })
+      const setUser = (user) => {
+      state.user = user;
+      state.isCut = true;
+      };
+
+      return {
+        state,
+        setUser,
+      };
+    },
+
+    provide() 
+    {
+      return {
+        state: this.state,
+        setUser: this.setUser, 
+      };
+    },
+
     data() 
     {
       return {
         isDisabled: false,
+        isCut: false, 
         isBigger: false,
         isMax: false,
         buttonWidth: 200,
@@ -62,12 +90,12 @@
         user: null,
       };
     },
+
     methods: 
     {
-      // Retrieve user from SigninButton
       handleUserSignedIn(user)
       {
-        this.user = user; 
+        this.state.user = user; 
         this.isDisabled = true;
       },
         handleClick() 
