@@ -1,4 +1,4 @@
-<!-- src/pages/ConversationsIndexPage.vue -->
+<!-- ConversationsPage.vue -->
 <template>
     <div>
       <h1>Conversations Page</h1>
@@ -8,8 +8,9 @@
   </template>
   
   <script>
-  export default {
-    name: 'ConversationsIndexPage',
-  };
+  export default
+    {
+        name: 'ConversationsIndexPage',
+    };
   </script>
   
