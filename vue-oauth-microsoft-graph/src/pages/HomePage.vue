@@ -1,9 +1,9 @@
 <template>
     <div>
-      <SigninButton @user-signed-in="handleUserSignedIn" />
+      <SigninButton/>
     </div>
-      <div v-if="state.user">
-        <p>Welcome, {{ state.user.username }}</p>
+      <div v-if="user">
+        <p>Welcome, {{user.username }}</p>
       </div>
     <div>
       <AsyncComponent @click="denied" />
@@ -37,8 +37,7 @@
 </template>
   
   <script>
-  import { reactive } from 'vue';
-
+  import { mapState } from 'vuex';
   import SigninButton from '../components/SigninButton.vue';
   import AsyncComponent from '../components/AsyncComponent.vue';
   import ButtonLayout from '../components/ButtonLayout.vue';
@@ -46,35 +45,12 @@
   export default 
   {
     name: 'HomePage',
+
     components: 
     {
       AsyncComponent,
       ButtonLayout,
       SigninButton,
-    },
-    setup() 
-    {
-      const state = reactive({
-        isCut: false,
-        user: null,
-      })
-      const setUser = (user) => {
-      state.user = user;
-      state.isCut = true;
-      };
-
-      return {
-        state,
-        setUser,
-      };
-    },
-
-    provide() 
-    {
-      return {
-        state: this.state,
-        setUser: this.setUser, 
-      };
     },
 
     data() 
@@ -87,17 +63,16 @@
         buttonWidth: 200,
         buttonHeight: 40,
         click: 1,
-        user: null,
       };
+    },
+
+    computed: 
+    {
+      ...mapState(['user']) // Map the `user` state from Vuex
     },
 
     methods: 
     {
-      handleUserSignedIn(user)
-      {
-        this.state.user = user; 
-        this.isDisabled = true;
-      },
         handleClick() 
         {
             this.isDisabled = true;
