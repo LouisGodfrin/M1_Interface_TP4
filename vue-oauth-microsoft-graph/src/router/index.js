@@ -1,7 +1,8 @@
-// src/router/index.js
+// Router configuration
+
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
-import ConversationsIndexPage from '../pages/ConversationsIndexPage.vue'; // Créez ce composant
+import ConversationsIndexPage from '../pages/ConversationsPage.vue'; // Créez ce composant
 
 const routes = [
   {

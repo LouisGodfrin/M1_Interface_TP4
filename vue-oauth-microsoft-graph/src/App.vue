@@ -2,13 +2,12 @@
   <img id = "tree" alt="Tree Logo" src="./assets/LogoApp.webp">
   <BaseLayout>
     <template #main>
-      <HomePage/> 
+      <router-view/>
     </template>
   </BaseLayout>
 </template>
 
 <script>
-import HomePage from '@/pages/HomePage.vue';
 import BaseLayout from '@/components/BaseLayout.vue';
 
 
@@ -17,7 +16,6 @@ export default
   name: 'App',
   components:
   {
-    HomePage,
     BaseLayout,
   }
 }
