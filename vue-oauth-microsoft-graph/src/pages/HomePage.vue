@@ -95,7 +95,7 @@
         {
             if (this.isPending) 
             {
-              return Promise.resolve(); // Ne pas ré-exécuter si déjà en attente
+              return Promise.resolve(); // Don't exect again is already is
             }
             this.isPending = true;
             return new Promise((resolve) => 

@@ -19,7 +19,7 @@ export async function initializeMsal()
       auth: 
       {
         clientId: process.env.VUE_APP_OAUTH_CLIENT_ID,
-        authority: "https://login.microsoftonline.com/common", // Vérifie si c'est la bonne autorité
+        authority: "https://login.microsoftonline.com/common", // Verify the good authentification
         redirectUri: process.env.VUE_APP_REDIRECT_URI
       },
       cache: 
@@ -41,17 +41,16 @@ export async function signInAndGetUser()
         throw new Error("MSAL instance is not initialized. Call initializeMsal() first.");
     }
 
-  // Vérifie s'il y a déjà un utilisateur authentifié
+  // If user is already login
   const currentAccount = msalInstance.getActiveAccount();
   if (currentAccount) 
   {
     console.log("User already signed in:", currentAccount);
-    return currentAccount; // Retourne l'utilisateur déjà authentifié
+    return currentAccount; // Return the user that is login
   }
 
   try 
   {
-    //await initializeMsal().then( )
     const authResult = await msalInstance.loginPopup(requestedScopes);
     msalInstance.setActiveAccount(authResult.account);
     return authResult.account;
