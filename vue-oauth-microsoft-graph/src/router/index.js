@@ -2,7 +2,7 @@
 
 import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '../pages/HomePage.vue';
-import ConversationsIndexPage from '../pages/ConversationsPage.vue'; // Créez ce composant
+import ConversationsPage from '../pages/ConversationsPage.vue'; // Créez ce composant
 
 const routes = [
   {
@@ -13,7 +13,7 @@ const routes = [
   {
     path: '/conversations',
     name: 'Conversations',
-    component: ConversationsIndexPage, // Affiche une page de placeholder pour le moment
+    component: ConversationsPage, // Affiche une page de placeholder pour le moment
   },
 ];
 
