@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="HomePage div">
       <SigninButton/>
     </div>
       <div v-if="user">
