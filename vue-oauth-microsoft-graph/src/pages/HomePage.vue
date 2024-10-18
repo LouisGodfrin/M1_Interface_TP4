@@ -3,7 +3,7 @@
       <SigninButton/>
     </div>
       <div v-if="user">
-        <p>Welcome, {{user.username }}</p>
+        <p>Welcome, {{user.name }}</p>
       </div>
     <div>
       <AsyncComponent @click="denied" />
